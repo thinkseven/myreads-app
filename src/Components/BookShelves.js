@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Suspense } from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './../BooksAPI'
-import BookShelf from './BookShelf'
+const BookShelf = React.lazy(() => import('./BookShelf'))
 
 class BookShelves extends Component {
   state = {
@@ -47,21 +47,23 @@ class BookShelves extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <BookShelf
-              title="Currently Reading"
-              books={currentlyReadingBooks}
-              onUpdateShelf={this.updateShelf}
-            />
-            <BookShelf
-              title="Want to Read"
-              books={wantToReadBooks}
-              onUpdateShelf={this.updateShelf}
-            />
-            <BookShelf
-              title="Read"
-              books={readBooks}
-              onUpdateShelf={this.updateShelf}
-            />
+            <Suspense fallback={<div>Loading ...</div>}>
+              <BookShelf
+                title="Currently Reading"
+                books={currentlyReadingBooks}
+                onUpdateShelf={this.updateShelf}
+              />
+              <BookShelf
+                title="Want to Read"
+                books={wantToReadBooks}
+                onUpdateShelf={this.updateShelf}
+              />
+              <BookShelf
+                title="Read"
+                books={readBooks}
+                onUpdateShelf={this.updateShelf}
+              />
+            </Suspense>
           </div>
         </div>
         <div className="open-search">
