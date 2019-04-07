@@ -22,10 +22,10 @@ const BookShelf = props => {
   )
 }
 
-// BookShelf.PropTypes = {
-//   books: PropTypes.array,
-//   onUpdateShelf: PropTypes.func,
-//   title: PropTypes.string,
-// }
+BookShelf.propTypes = {
+  books: PropTypes.array,
+  onUpdateShelf: PropTypes.func,
+  title: PropTypes.string,
+}
 
 export default BookShelf
